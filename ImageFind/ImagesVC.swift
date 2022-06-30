@@ -9,6 +9,7 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
+
 class ImagesVC: UICollectionViewController {
     
     private lazy var addButton: UIBarButtonItem = {
@@ -115,7 +116,6 @@ class ImagesVC: UICollectionViewController {
 }
 
 //MARK: Search Bar Delegate
-
 extension ImagesVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
