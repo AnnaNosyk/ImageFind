@@ -21,6 +21,10 @@ class ImagesVC: UICollectionViewController {
     }()
     
     var searchController : UISearchController!
+   
+    var networkDataFetcher = NetworkDataFether()
+    
+    private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,7 @@ class ImagesVC: UICollectionViewController {
         setupColletionView()
         setupNavigationBar()
         setupSearchBar()
+       
     }
     
   
@@ -120,6 +125,16 @@ extension ImagesVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
+        // action when user take finger off the screen
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [self] _ in
+            networkDataFetcher.getImages(searchText: searchText) { searchResults in
+                searchResults?.results.map({ image in
+                    print(image.urls["small"])
+                })
+            }
+
+        })
+       
     }
 }
 
