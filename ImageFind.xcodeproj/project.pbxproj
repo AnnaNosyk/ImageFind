@@ -18,9 +18,12 @@
 		178FEADF286E5D1700AE2CB6 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178FEADE286E5D1700AE2CB6 /* NetworkService.swift */; };
 		17D79ED1286F3D4500DCD3F8 /* NetworkDataFether.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D79ED0286F3D4500DCD3F8 /* NetworkDataFether.swift */; };
 		17D79ED3286F3DEB00DCD3F8 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D79ED2286F3DEB00DCD3F8 /* SearchResults.swift */; };
+		17D79ED62873207700DCD3F8 /* ImagesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D79ED52873207700DCD3F8 /* ImagesViewCell.swift */; };
+		C2A63AFBD06046222F38F13B /* Pods_ImageFind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE22DD26F701D9D17ABF681 /* Pods_ImageFind.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15C945B1375A9D5188621B77 /* Pods-ImageFind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageFind.release.xcconfig"; path = "Target Support Files/Pods-ImageFind/Pods-ImageFind.release.xcconfig"; sourceTree = "<group>"; };
 		178FEABF286C833600AE2CB6 /* ImageFind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		178FEAC2286C833600AE2CB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		178FEAC4286C833600AE2CB6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +37,9 @@
 		178FEADE286E5D1700AE2CB6 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		17D79ED0286F3D4500DCD3F8 /* NetworkDataFether.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFether.swift; sourceTree = "<group>"; };
 		17D79ED2286F3DEB00DCD3F8 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		17D79ED52873207700DCD3F8 /* ImagesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewCell.swift; sourceTree = "<group>"; };
+		7EE22DD26F701D9D17ABF681 /* Pods_ImageFind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImageFind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC78A4A274FEDAC509465606 /* Pods-ImageFind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageFind.debug.xcconfig"; path = "Target Support Files/Pods-ImageFind/Pods-ImageFind.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2A63AFBD06046222F38F13B /* Pods_ImageFind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +59,8 @@
 			children = (
 				178FEAC1286C833600AE2CB6 /* ImageFind */,
 				178FEAC0286C833600AE2CB6 /* Products */,
+				414FAE6DD714DAFD0C50B8B7 /* Pods */,
+				A070A1057C7E3390E53FC720 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +80,7 @@
 				178FEAC6286C833600AE2CB6 /* ViewController.swift */,
 				178FEAD6286C835900AE2CB6 /* MainTabBarController.swift */,
 				178FEAD8286C841B00AE2CB6 /* ImagesVC.swift */,
+				17D79ED52873207700DCD3F8 /* ImagesViewCell.swift */,
 				17D79ED4286F46F500DCD3F8 /* Model */,
 				17D79ECF286F3D1800DCD3F8 /* Service */,
 				178FEACB286C833600AE2CB6 /* Assets.xcassets */,
@@ -98,6 +108,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		414FAE6DD714DAFD0C50B8B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC78A4A274FEDAC509465606 /* Pods-ImageFind.debug.xcconfig */,
+				15C945B1375A9D5188621B77 /* Pods-ImageFind.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A070A1057C7E3390E53FC720 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EE22DD26F701D9D17ABF681 /* Pods_ImageFind.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,9 +133,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 178FEAD3286C833600AE2CB6 /* Build configuration list for PBXNativeTarget "ImageFind" */;
 			buildPhases = (
+				35159422ABA2F8ADEF80CB4F /* [CP] Check Pods Manifest.lock */,
 				178FEABB286C833600AE2CB6 /* Sources */,
 				178FEABC286C833600AE2CB6 /* Frameworks */,
 				178FEABD286C833600AE2CB6 /* Resources */,
+				FD3110223948C503101CC779 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -164,6 +194,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		35159422ABA2F8ADEF80CB4F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ImageFind-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD3110223948C503101CC779 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ImageFind/Pods-ImageFind-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ImageFind/Pods-ImageFind-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ImageFind/Pods-ImageFind-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		178FEABB286C833600AE2CB6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -175,6 +247,7 @@
 				178FEAD7286C835900AE2CB6 /* MainTabBarController.swift in Sources */,
 				178FEAC5286C833600AE2CB6 /* SceneDelegate.swift in Sources */,
 				178FEADF286E5D1700AE2CB6 /* NetworkService.swift in Sources */,
+				17D79ED62873207700DCD3F8 /* ImagesViewCell.swift in Sources */,
 				17D79ED3286F3DEB00DCD3F8 /* SearchResults.swift in Sources */,
 				178FEAD9286C841B00AE2CB6 /* ImagesVC.swift in Sources */,
 			);
@@ -312,6 +385,7 @@
 		};
 		178FEAD4286C833600AE2CB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC78A4A274FEDAC509465606 /* Pods-ImageFind.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -340,6 +414,7 @@
 		};
 		178FEAD5286C833600AE2CB6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15C945B1375A9D5188621B77 /* Pods-ImageFind.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

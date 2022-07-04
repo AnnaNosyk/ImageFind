@@ -7,9 +7,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-
 class ImagesVC: UICollectionViewController {
     
     private lazy var addButton: UIBarButtonItem = {
@@ -19,6 +16,9 @@ class ImagesVC: UICollectionViewController {
     private lazy var actionButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem:  .action, target: self, action: #selector(actionButtonTap))
     }()
+    
+    //array for all images
+        private var images = [UnspashImages]()
     
     var searchController : UISearchController!
    
@@ -48,7 +48,7 @@ class ImagesVC: UICollectionViewController {
     
     // MARK: - Setup UI Elements
     private func setupColletionView() {
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(ImagesViewCell.self, forCellWithReuseIdentifier: ImagesViewCell.cellId)
     }
     
     private func setupNavigationBar() {
@@ -75,15 +75,13 @@ class ImagesVC: UICollectionViewController {
 // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 5
+        return images.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        cell.backgroundColor = .red
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesViewCell.cellId, for: indexPath) as! ImagesViewCell
+        let cellImages = images[indexPath.item]
+        cell.unsplashImage = cellImages
         return cell
     }
 
@@ -126,13 +124,12 @@ extension ImagesVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
         // action when user take finger off the screen
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [self] _ in
-            networkDataFetcher.getImages(searchText: searchText) { searchResults in
-                searchResults?.results.map({ image in
-                    print(image.urls["small"])
-                })
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: {  _ in
+            self.networkDataFetcher.getImages(searchText: searchText) { [weak self] searchResults in
+                guard let fetchesImages = searchResults else {return}
+                self?.images = fetchesImages.results
+                self?.collectionView.reloadData()
             }
-
         })
        
     }
