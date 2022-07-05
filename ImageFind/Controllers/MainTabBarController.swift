@@ -9,6 +9,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     let imageVc = ImagesVC(collectionViewLayout: UICollectionViewFlowLayout())
+    let likesVc = LikesImagesVC(collectionViewLayout: UICollectionViewFlowLayout())
     
     
     override func viewDidLoad() {
@@ -16,7 +17,7 @@ class MainTabBarController: UITabBarController {
         view.backgroundColor = .white
         viewControllers = [
             generateNavigationController(rootVc: imageVc, title: "Images", image: UIImage(systemName: "photo.fill")!),
-            generateNavigationController(rootVc: UIViewController(), title: "Likes", image: UIImage(systemName: "heart.fill")!)
+            generateNavigationController(rootVc: likesVc, title: "Likes", image: UIImage(systemName: "heart.fill")!)
         ]
         
         

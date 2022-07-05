@@ -13,18 +13,18 @@ class ImagesViewCell: UICollectionViewCell {
     static let cellId = "ImageCell"
     
     private let checkmark: UIImageView = {
-        let image = UIImage(systemName: "checkmark.square.fill ")
+        let image = UIImage(systemName:"checkmark.square.fill")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.alpha = 0
         return imageView
     }()
     
-    private let photoImageView: UIImageView = {
+     let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .white
-        imageView.contentMode = .scaleAspectFill
+         imageView.contentMode = .scaleAspectFill
         return imageView
         
     }()
@@ -80,7 +80,7 @@ class ImagesViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             checkmark.trailingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: -8),
-            checkmark.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 8)
+            checkmark.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -10)
         ])
         
     }

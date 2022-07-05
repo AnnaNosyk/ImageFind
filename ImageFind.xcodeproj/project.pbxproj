@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		175058AF28747F6E005C2BFE /* LikesImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175058AE28747F6E005C2BFE /* LikesImageViewCell.swift */; };
+		175058B328748697005C2BFE /* LikesImagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175058B228748697005C2BFE /* LikesImagesVC.swift */; };
 		178FEAC3286C833600AE2CB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178FEAC2286C833600AE2CB6 /* AppDelegate.swift */; };
 		178FEAC5286C833600AE2CB6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178FEAC4286C833600AE2CB6 /* SceneDelegate.swift */; };
 		178FEAC7286C833600AE2CB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178FEAC6286C833600AE2CB6 /* ViewController.swift */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		15C945B1375A9D5188621B77 /* Pods-ImageFind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageFind.release.xcconfig"; path = "Target Support Files/Pods-ImageFind/Pods-ImageFind.release.xcconfig"; sourceTree = "<group>"; };
+		175058AE28747F6E005C2BFE /* LikesImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesImageViewCell.swift; sourceTree = "<group>"; };
+		175058B228748697005C2BFE /* LikesImagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesImagesVC.swift; sourceTree = "<group>"; };
 		178FEABF286C833600AE2CB6 /* ImageFind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		178FEAC2286C833600AE2CB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		178FEAC4286C833600AE2CB6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +58,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		175058B02874859F005C2BFE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				175058B1287485BA005C2BFE /* Cells */,
+				178FEAD6286C835900AE2CB6 /* MainTabBarController.swift */,
+				178FEAD8286C841B00AE2CB6 /* ImagesVC.swift */,
+				175058B228748697005C2BFE /* LikesImagesVC.swift */,
+				178FEAC6286C833600AE2CB6 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		175058B1287485BA005C2BFE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				17D79ED52873207700DCD3F8 /* ImagesViewCell.swift */,
+				175058AE28747F6E005C2BFE /* LikesImageViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		178FEAB6286C833600AE2CB6 = {
 			isa = PBXGroup;
 			children = (
@@ -77,12 +102,9 @@
 			children = (
 				178FEAC2286C833600AE2CB6 /* AppDelegate.swift */,
 				178FEAC4286C833600AE2CB6 /* SceneDelegate.swift */,
-				178FEAC6286C833600AE2CB6 /* ViewController.swift */,
-				178FEAD6286C835900AE2CB6 /* MainTabBarController.swift */,
-				178FEAD8286C841B00AE2CB6 /* ImagesVC.swift */,
-				17D79ED52873207700DCD3F8 /* ImagesViewCell.swift */,
+				175058B02874859F005C2BFE /* Controllers */,
 				17D79ED4286F46F500DCD3F8 /* Model */,
-				17D79ECF286F3D1800DCD3F8 /* Service */,
+				17D79ECF286F3D1800DCD3F8 /* Services */,
 				178FEACB286C833600AE2CB6 /* Assets.xcassets */,
 				178FEACD286C833600AE2CB6 /* LaunchScreen.storyboard */,
 				178FEAD0286C833600AE2CB6 /* Info.plist */,
@@ -91,13 +113,13 @@
 			path = ImageFind;
 			sourceTree = "<group>";
 		};
-		17D79ECF286F3D1800DCD3F8 /* Service */ = {
+		17D79ECF286F3D1800DCD3F8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				178FEADE286E5D1700AE2CB6 /* NetworkService.swift */,
 				17D79ED0286F3D4500DCD3F8 /* NetworkDataFether.swift */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		17D79ED4286F46F500DCD3F8 /* Model */ = {
@@ -114,7 +136,6 @@
 				BC78A4A274FEDAC509465606 /* Pods-ImageFind.debug.xcconfig */,
 				15C945B1375A9D5188621B77 /* Pods-ImageFind.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -242,12 +263,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				178FEAC7286C833600AE2CB6 /* ViewController.swift in Sources */,
+				175058AF28747F6E005C2BFE /* LikesImageViewCell.swift in Sources */,
 				17D79ED1286F3D4500DCD3F8 /* NetworkDataFether.swift in Sources */,
 				178FEAC3286C833600AE2CB6 /* AppDelegate.swift in Sources */,
 				178FEAD7286C835900AE2CB6 /* MainTabBarController.swift in Sources */,
 				178FEAC5286C833600AE2CB6 /* SceneDelegate.swift in Sources */,
 				178FEADF286E5D1700AE2CB6 /* NetworkService.swift in Sources */,
 				17D79ED62873207700DCD3F8 /* ImagesViewCell.swift in Sources */,
+				175058B328748697005C2BFE /* LikesImagesVC.swift in Sources */,
 				17D79ED3286F3DEB00DCD3F8 /* SearchResults.swift in Sources */,
 				178FEAD9286C841B00AE2CB6 /* ImagesVC.swift in Sources */,
 			);
