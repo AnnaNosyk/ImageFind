@@ -8,13 +8,13 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-    let imageVc = ImagesVC(collectionViewLayout: UICollectionViewFlowLayout())
+    let imageVc = ImagesVC(collectionViewLayout: WaterfallLayout())
     let likesVc = LikesImagesVC(collectionViewLayout: UICollectionViewFlowLayout())
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "backGroungColor")
         viewControllers = [
             generateNavigationController(rootVc: imageVc, title: "Images", image: UIImage(systemName: "photo.fill")!),
             generateNavigationController(rootVc: likesVc, title: "Likes", image: UIImage(systemName: "heart.fill")!)

@@ -30,27 +30,27 @@ class LikesImagesVC: UICollectionViewController {
     
     private func setupNavigationBar() {
         let title = UILabel()
-        title.text = "MY IMAGES"
+        title.text = Constants().myImagesStr
         title.font = UIFont.systemFont(ofSize: 15,weight: .medium)
-        title.textColor = .black
+        title.textColor = UIColor(named: "textColor")
+        navigationController?.navigationBar.barTintColor = UIColor(named: "backGroungColor")
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: title)
         navigationItem.rightBarButtonItems = [deleteButton]
     }
     
     private func setupColletionView() {
+        collectionView.backgroundColor = UIColor(named: "backGroungColor")
         collectionView.register(LikesImageViewCell.self, forCellWithReuseIdentifier: LikesImageViewCell.cellId)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumInteritemSpacing = 1
         layout.minimumLineSpacing = 1
-
     }
     
 
     // MARK: - UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return images.count
     }
 

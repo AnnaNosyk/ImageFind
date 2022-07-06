@@ -36,8 +36,8 @@ class ImagesVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateNavigButtonsState()
-        collectionView.backgroundColor = .white
-        navigationController?.navigationBar.barTintColor = .white
+        collectionView.backgroundColor = UIColor(named: "backGroungColor")
+        navigationController?.navigationBar.barTintColor = UIColor(named: "backGroungColor")
         setupColletionView()
         setupNavigationBar()
         setupSearchBar()
@@ -47,8 +47,6 @@ class ImagesVC: UICollectionViewController {
   
     
     @objc func addButtonTap() {
-        print(selectedImages.count)
-        
         let selectedPhotos = collectionView.indexPathsForSelectedItems?.reduce([], { (photosss, indexPath) -> [UnspashImages] in
             var mutablePhotos = photosss
             let image = images[indexPath.item]
@@ -56,8 +54,8 @@ class ImagesVC: UICollectionViewController {
             return mutablePhotos
         })
         
-        let alertController = UIAlertController(title: "", message: "\(selectedPhotos!.count) фото будут добавлены в альбом", preferredStyle: .alert)
-        let add = UIAlertAction(title: "Добавить", style: .default) { (action) in
+        let alertController = UIAlertController(title: Constants().alertTitle, message: "\(selectedPhotos!.count) \(Constants().alertMessageStr)", preferredStyle: .alert)
+        let add = UIAlertAction(title: Constants().alerAddkStr, style: .default) { (action) in
             let tabbar = self.tabBarController as! MainTabBarController
             let navVC = tabbar.viewControllers?[1] as! UINavigationController
             let likesVC = navVC.topViewController as! LikesImagesVC
@@ -67,7 +65,7 @@ class ImagesVC: UICollectionViewController {
             
             self.refresh()
         }
-        let cancel = UIAlertAction(title: "Отменить", style: .cancel) { (action) in
+        let cancel = UIAlertAction(title: Constants().alertCancelStr, style: .cancel) { (action) in
         }
         alertController.addAction(add)
         alertController.addAction(cancel)
@@ -107,13 +105,16 @@ class ImagesVC: UICollectionViewController {
         collectionView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         collectionView.contentInsetAdjustmentBehavior = .automatic
         collectionView.allowsMultipleSelection = true
+        if let waterfallLayout = collectionViewLayout as? WaterfallLayout {
+            waterfallLayout.delegate = self
+        }
     }
     
     private func setupNavigationBar() {
         let title = UILabel()
-        title.text = "IMAGES"
+        title.text = Constants().imagesStr
         title.font = UIFont.systemFont(ofSize: 15,weight: .medium)
-        title.textColor = .black
+        title.textColor = UIColor(named: "textColor")
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: title)
         navigationItem.rightBarButtonItems = [actionButton, addButton]
     }
@@ -121,6 +122,8 @@ class ImagesVC: UICollectionViewController {
     private func setupSearchBar() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.autocapitalizationType = .none
+        //searchController.searchBar.placeholder = "Add"
+        searchController.searchBar.searchTextField.textColor = UIColor(named: "textColor")
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.hidesNavigationBarDuringPresentation = false
@@ -205,3 +208,12 @@ extension ImagesVC: UICollectionViewDelegateFlowLayout {
     }
   }
 
+// MARK: - WaterfallLayoutDelegate
+extension ImagesVC: WaterfallLayoutDelegate {
+    func waterfallLayout(_ layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let photo = images[indexPath.item]
+        //        print("photo.width: \(photo.width) photo.height: \(photo.height)\n")
+        return CGSize(width: photo.width, height: photo.height)
+    }
+}
