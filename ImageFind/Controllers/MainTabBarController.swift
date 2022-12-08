@@ -16,8 +16,8 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "backGroungColor")
         viewControllers = [
-            generateNavigationController(rootVc: imageVc, title: "Images", image: UIImage(systemName: "photo.fill")!),
-            generateNavigationController(rootVc: likesVc, title: "Likes", image: UIImage(systemName: "heart.fill")!)
+            generateNavigationController(rootVc: imageVc, title: Constants().iconImgStr, image: UIImage(systemName: "photo.fill")!),
+            generateNavigationController(rootVc: likesVc, title: Constants().iconLikeStr, image: UIImage(systemName: "heart.fill")!)
         ]
         
         

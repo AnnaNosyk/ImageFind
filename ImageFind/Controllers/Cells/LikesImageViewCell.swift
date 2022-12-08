@@ -51,8 +51,14 @@ class LikesImageViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         
         didSet {
-           // updateCells()
+            updateCells()
         }
+    }
+    
+    // func for change cells when its selected
+    private func updateCells() {
+        likeImageView.alpha = isSelected ? 0.7 : 1
+        checkmark.alpha = isSelected ? 1 : 0
     }
     
     override func prepareForReuse() {

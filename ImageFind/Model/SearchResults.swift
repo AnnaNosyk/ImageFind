@@ -7,14 +7,13 @@
 
 import Foundation
 
-
 struct SearchResults: Decodable {
     let total:Int
     let results: [UnspashImages]
 }
 
 // parameters of image
-struct UnspashImages: Decodable {
+struct UnspashImages: Decodable,Encodable {
     let width: Int
     let height:Int
     let urls: [URLKind.RawValue:String]

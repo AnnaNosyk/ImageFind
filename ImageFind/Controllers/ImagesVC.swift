@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ImagesVC: UICollectionViewController {
+    
     
     private lazy var addButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem:  .add, target: self, action: #selector(addButtonTap))
@@ -17,61 +19,47 @@ class ImagesVC: UICollectionViewController {
         return UIBarButtonItem(barButtonSystemItem:  .action, target: self, action: #selector(actionButtonTap))
     }()
     
-    
     private var images = [UnspashImages]()
     private var selectedImages = [UIImage]()
+    var likesImages: Results<MyLikes>?
     private let itemsPerRow: CGFloat = 2
     private let sectionsInserts = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     private var numberOfSelectedImages: Int {
         return collectionView.indexPathsForSelectedItems?.count ?? 0
     }
     
-    
     var searchController : UISearchController!
-   
     var networkDataFetcher = NetworkDataFether()
-    
     private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateNavigButtonsState()
-        collectionView.backgroundColor = UIColor(named: "backGroungColor")
-        navigationController?.navigationBar.barTintColor = UIColor(named: "backGroungColor")
         setupColletionView()
         setupNavigationBar()
         setupSearchBar()
        
     }
     
-  
-    
     @objc func addButtonTap() {
-        let selectedPhotos = collectionView.indexPathsForSelectedItems?.reduce([], { (photosss, indexPath) -> [UnspashImages] in
-            var mutablePhotos = photosss
+        let selectedPhotos = collectionView.indexPathsForSelectedItems?.reduce([], { (imgs, indexPath) -> [UnspashImages] in
+            var mutablePhotos = imgs
+            
             let image = images[indexPath.item]
             mutablePhotos.append(image)
             return mutablePhotos
         })
-        
-        let alertController = UIAlertController(title: Constants().alertTitle, message: "\(selectedPhotos!.count) \(Constants().alertMessageStr)", preferredStyle: .alert)
-        let add = UIAlertAction(title: Constants().alerAddkStr, style: .default) { (action) in
-            let tabbar = self.tabBarController as! MainTabBarController
-            let navVC = tabbar.viewControllers?[1] as! UINavigationController
-            let likesVC = navVC.topViewController as! LikesImagesVC
     
-            likesVC.images.append(contentsOf: selectedPhotos ?? [])
-            likesVC.collectionView.reloadData()
-            
+        Alert().alert(viewController: self, message: "\(selectedPhotos!.count) \(Constants().alertMessageStr)") { UIAlertAction in
+            for i in self.selectedImages {
+                StorageManager.shared.saveImage(image: i)
+            }
+            self.refresh()
+        } cancelComplition: { UIAlertAction in
             self.refresh()
         }
-        let cancel = UIAlertAction(title: Constants().alertCancelStr, style: .cancel) { (action) in
-        }
-        alertController.addAction(add)
-        alertController.addAction(cancel)
-        present(alertController, animated: true)
+        
     }
-    
     
     @objc func actionButtonTap(sender: UIBarButtonItem) {
        let shareController = UIActivityViewController(activityItems: selectedImages, applicationActivities: nil)
@@ -101,6 +89,7 @@ class ImagesVC: UICollectionViewController {
     
     // MARK: - Setup UI Elements
     private func setupColletionView() {
+        collectionView.backgroundColor = UIColor(named: Constants().backGroungColor)
         collectionView.register(ImagesViewCell.self, forCellWithReuseIdentifier: ImagesViewCell.cellId)
         collectionView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         collectionView.contentInsetAdjustmentBehavior = .automatic
@@ -114,7 +103,8 @@ class ImagesVC: UICollectionViewController {
         let title = UILabel()
         title.text = Constants().imagesStr
         title.font = UIFont.systemFont(ofSize: 15,weight: .medium)
-        title.textColor = UIColor(named: "textColor")
+        title.textColor = UIColor(named: Constants().textColor)
+        navigationController?.navigationBar.barTintColor = UIColor(named: Constants().backGroungColor)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: title)
         navigationItem.rightBarButtonItems = [actionButton, addButton]
     }
@@ -123,7 +113,7 @@ class ImagesVC: UICollectionViewController {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.autocapitalizationType = .none
         //searchController.searchBar.placeholder = "Add"
-        searchController.searchBar.searchTextField.textColor = UIColor(named: "textColor")
+        searchController.searchBar.searchTextField.textColor = UIColor(named: Constants().textColor)
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.hidesNavigationBarDuringPresentation = false
@@ -131,7 +121,6 @@ class ImagesVC: UICollectionViewController {
         searchController.searchBar.delegate = self
         
     }
-
 
 // MARK: - UICollectionViewDataSource
 
@@ -163,6 +152,38 @@ class ImagesVC: UICollectionViewController {
     }
 
 }
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension ImagesVC: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let image = images[indexPath.item]
+        let paddingSpace = sectionsInserts.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        let height = CGFloat(image.height) * widthPerItem / CGFloat(image.width)
+        return CGSize(width: widthPerItem, height: height)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionsInserts
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionsInserts.left
+    }
+  }
+
+// MARK: - WaterfallLayoutDelegate
+extension ImagesVC: WaterfallLayoutDelegate {
+    func waterfallLayout(_ layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let photo = images[indexPath.item]
+        return CGSize(width: photo.width, height: photo.height)
+    }
+}
+
 
 //MARK: - Search Bar Delegate
 extension ImagesVC: UISearchBarDelegate {
@@ -180,40 +201,5 @@ extension ImagesVC: UISearchBarDelegate {
             }
         })
        
-    }
-}
-
-
-// MARK: UICollectionViewDelegateFlowLayout
-
-extension ImagesVC: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let image = images[indexPath.item]
-        let paddingSpace = sectionsInserts.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
-        let height = CGFloat(image.height) * widthPerItem / CGFloat(image.width)
-        return CGSize(width: widthPerItem, height: height)
-        
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionsInserts
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionsInserts.left
-    }
-  }
-
-// MARK: - WaterfallLayoutDelegate
-extension ImagesVC: WaterfallLayoutDelegate {
-    func waterfallLayout(_ layout: WaterfallLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let photo = images[indexPath.item]
-        //        print("photo.width: \(photo.width) photo.height: \(photo.height)\n")
-        return CGSize(width: photo.width, height: photo.height)
     }
 }

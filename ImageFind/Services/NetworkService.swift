@@ -36,7 +36,7 @@ class NetworkService {
         var parameters = [String:String]()
         parameters["query"] = searchText
         parameters["page"] = String(1)
-        parameters["per_page"] = String(30)
+        parameters["per_page"] = String(50)
         return parameters
     }
     
